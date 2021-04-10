@@ -1,0 +1,7 @@
+weight  =  int(input("Введите вес "))             
+height  =  int(input("Введите рост "))
+bmi  =  int(weight / height**2 * 10000)
+print("Ваш индекс массы тела: ", bmi)
+x  =  list("================================================") 
+x.insert(bmi, "||")
+print("20", x[20:50], "50")
