@@ -12,24 +12,32 @@ def show_users():
     for key in users:
         print(key)
 # Декоратор запроса ника
+current_user = 'none'
+def ask(func):
+    def asker():
+        global current_user
+        current_user = input('Введите никнейм пользователя ')
+        func()
+    return asker
+    
 
 # 2. Посмотреть инфо о пользователе (рост, вес, шкала БМИ) (R)
+@ask
 def show_info():
-    current_user = input('Введите никнейм пользователя ')
     print(users.get(current_user))
 
 
 # 3. Изменить данные о пользователе (выбираем соот во ключу)
+@ask
 def upd_user():
-    current_user = input('Кого меняем? ')
     print(users.get(current_user))
-    user_data = input('Что изменить?  (Логин, Имя, Рост, Вес) ')
+    user_data = input('Что изменить?  (ФИО, Рост, Вес) ')
     value = input('новое значение = .. ')
     dpath.util.set(users, [current_user, user_data], value)
 
 # 4. Удалить выбранного пользователя (D)
+@ask
 def del_user():
-    current_user = input('Кого?')
     users.__delitem__(current_user)
     print('Done')
 
